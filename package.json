@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
+    "typeorm": "ts-node-dev node_modules/typeorm/cli.js",
     "test": "NODE_ENV=test jest",
-    "typeorm": "ts-node-dev node_modules/typeorm/cli.js"
+    "posttest": "rm ./src/database/database.test.sqlite"
   },
   "keywords": [],
   "author": "",
