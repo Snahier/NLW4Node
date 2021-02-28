@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { getCustomRepository } from "typeorm"
+import { getCustomRepository, IsNull, Not } from "typeorm"
 import { SurveysUsersRepository } from "../repositories/SurveyUsersRepository"
 
 class NpsController {
@@ -8,7 +8,10 @@ class NpsController {
 
     const surveysUsersRepository = getCustomRepository(SurveysUsersRepository)
 
-    const surveyUsers = await surveysUsersRepository.find({ survey_id })
+    const surveyUsers = await surveysUsersRepository.find({
+      survey_id,
+      value: Not(IsNull()),
+    })
 
     const detractors = surveyUsers.filter(
       (survey) => survey.value >= 0 && survey.value <= 6
